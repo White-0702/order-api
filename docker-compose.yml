@@ -1,0 +1,26 @@
+# version: '3.8'
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - '8080:80'
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - laravel
+    mysql:
+        image: 'mysql:8.0'
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: orders
+        ports:
+            - '3306:3306'
+        networks:
+            - laravel
+networks:
+    laravel: null
+volumes:
+    sail-mysql:
+        driver: local
